@@ -23,21 +23,21 @@ class OwnersView(View):
         owners = Owner.objects.all()
         results = []
         for owner in owners:
-            dogs = owner.dog_set.all()
-            dogs_list = []
-            for dog in dogs:
-                dogs_list.append(
-                    {
-                        "dog_name" : dog.name,
-                        "dog.age" : dog.age
-                    }
-                )
+            # dogs = owner.dog_set.all()
+            # dogs_list = []
+            # for dog in dogs:
+            #     dogs_list.append(
+            #         {
+            #             "dog_name" : dog.name,
+            #             "dog_age" : dog.age
+            #         }
+            #     )
             results.append(
             {
                 "name" : owner.name,
                 "email": owner.email,
                 "age" : owner.age,
-                "dogList" : dogs_list
+                "dogList" : [{"dog_name" : dog.name, "dog_age" : dog.age,} for dog in owner.dog_set.all()]
             }
         )
     
